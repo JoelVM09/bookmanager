@@ -5,4 +5,5 @@ return [
     'user'    => 'tu_usuario',
     'pass'    => 'tu_contrasena',
     'charset' => 'utf8mb4',
+        'base_url' => '',
 ];
