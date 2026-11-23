@@ -1,0 +1,7 @@
+# Credenciales locales
+config/config.local.php
+
+# Archivos del sistema y editor
+.vscode/
+.DS_Store
+Thumbs.db
