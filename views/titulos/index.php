@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../../includes/init.php';
 require_once __DIR__ . '/../../models/Titulo.php';
 
-
 $db = (new Database())->getConnection();
 $titulos = (new Titulo($db))->getAll();
 
@@ -27,14 +26,16 @@ require __DIR__ . '/../../includes/header.php';
                         <th>Titulo</th>
                         <th>Tipo</th>
                         <th>Editorial</th>
-                        <th class="text-right">Precio (RD$)</th>
+                        <th class="text-right">Precio</th>
+                        <th class="text-right">Ventas</th>
                         <th>Publicacion</th>
+                        <th class="text-center">Contrato</th>
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($titulos)): ?>
-                        <tr><td colspan="7" class="text-center text-muted">No hay titulos registrados.</td></tr>
+                        <tr><td colspan="9" class="text-center text-muted">No hay titulos registrados.</td></tr>
                     <?php else: ?>
                         <?php foreach ($titulos as $t): ?>
                             <tr>
@@ -45,7 +46,15 @@ require __DIR__ . '/../../includes/header.php';
                                 <td class="text-right">
                                     <?= $t['precio'] !== null ? number_format((float) $t['precio'], 2) : '-' ?>
                                 </td>
-                                <td><?= e($t['fecha_pub']) ?></td>
+                                <td class="text-right">
+                                    <?= $t['total_ventas'] !== null ? number_format((int) $t['total_ventas']) : '-' ?>
+                                </td>
+                                <td><?= e(substr((string) $t['fecha_pub'], 0, 10)) ?></td>
+                                <td class="text-center">
+                                    <?= (string) $t['contrato'] === '1'
+                                        ? '<span class="badge badge-success">Si</span>'
+                                        : '<span class="badge badge-secondary">No</span>' ?>
+                                </td>
                                 <td class="text-center">
                                     <a href="editar.php?id=<?= urlencode($t['id_titulo']) ?>" class="btn btn-warning btn-sm" title="Editar">
                                         <i class="fas fa-edit"></i>

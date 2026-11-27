@@ -14,9 +14,15 @@ if (!$titulo) {
     exit;
 }
 
+$tieneRelaciones = $tituloModel->tieneRelaciones($id);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tituloModel->delete($id);
-    setFlash('success', 'Titulo eliminado correctamente.');
+    if ($tieneRelaciones) {
+        setFlash('danger', 'No se puede eliminar: el titulo tiene ventas o autores asociados.');
+    } else {
+        $tituloModel->delete($id);
+        setFlash('success', 'Titulo eliminado correctamente.');
+    }
     header('Location: index.php');
     exit;
 }
@@ -31,7 +37,14 @@ require __DIR__ . '/../../includes/header.php';
         <h6 class="m-0 font-weight-bold text-danger">Confirmar eliminacion</h6>
     </div>
     <div class="card-body">
-        <p>Estas seguro de que deseas eliminar este titulo? Esta accion no se puede deshacer.</p>
+        <?php if ($tieneRelaciones): ?>
+            <div class="alert alert-warning">
+                Este titulo tiene ventas o autores asociados y no puede eliminarse.
+            </div>
+        <?php else: ?>
+            <p>Estas seguro de que deseas eliminar este titulo? Esta accion no se puede deshacer.</p>
+        <?php endif; ?>
+
         <ul>
             <li><strong>ID:</strong> <?= e($titulo['id_titulo']) ?></li>
             <li><strong>Titulo:</strong> <?= e($titulo['titulo']) ?></li>
@@ -40,8 +53,10 @@ require __DIR__ . '/../../includes/header.php';
 
         <form method="POST" action="eliminar.php?id=<?= urlencode($id) ?>">
             <input type="hidden" name="id_titulo" value="<?= e($id) ?>">
-            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Si, eliminar</button>
-            <a href="index.php" class="btn btn-secondary">Cancelar</a>
+            <?php if (!$tieneRelaciones): ?>
+                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Si, eliminar</button>
+            <?php endif; ?>
+            <a href="index.php" class="btn btn-secondary">Volver</a>
         </form>
     </div>
 </div>
