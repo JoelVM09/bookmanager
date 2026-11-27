@@ -23,6 +23,8 @@ Sistema de gestion de libreria desarrollado con Programacion Orientada a Objetos
 - Menu lateral funcional entre Inicio, Tiendas y Titulos.
 - Mensajes de confirmacion y de error en cada operacion.
 
+pd habia creado mi propia base de datos pero tuve que cambiarla por la proporcionada por el profesor en clase. El sistema usa tiendas, titulos y publicadores. Como la base no define llaves foraneas, la aplicacion impide eliminar tiendas con ventas y titulos con ventas o autores asociados."
+
 ## Estructura del proyecto
 
 ```text
@@ -57,7 +59,7 @@ bookmanager/
 
 1. Instalar XAMPP (o similar) e iniciar Apache y MySQL.
 2. Copiar el proyecto en `C:\xampp\htdocs\bookmanager`.
-3. En phpMyAdmin crear la base `dblibreria` e importar `database/dblibreria.sql`.
+3. En phpMyAdmin crear una base de datos e importar `database/dblibreria.sql`
 4. Copiar `config/config.example.php` como `config/config.local.php` y ajustar las credenciales. Para uso local:
 
    ```php
