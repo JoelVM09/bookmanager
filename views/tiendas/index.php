@@ -26,23 +26,27 @@ require __DIR__ . '/../../includes/header.php';
                         <th>Nombre</th>
                         <th>Direccion</th>
                         <th>Ciudad</th>
-                        <th>Provincia</th>
+                        <th>Estado</th>
+                        <th>Pais</th>
                         <th>Cod. postal</th>
+                        <th>Terminos</th>
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($tiendas)): ?>
-                        <tr><td colspan="7" class="text-center text-muted">No hay tiendas registradas.</td></tr>
+                        <tr><td colspan="9" class="text-center text-muted">No hay tiendas registradas.</td></tr>
                     <?php else: ?>
                         <?php foreach ($tiendas as $t): ?>
                             <tr>
                                 <td><?= e($t['id_tienda']) ?></td>
                                 <td><?= e($t['nombre_tienda']) ?></td>
-                                <td><?= e($t['direccion']) ?></td>
+                                <td><?= e($t['direcc_tienda']) ?></td>
                                 <td><?= e($t['ciudad']) ?></td>
-                                <td><?= e($t['provincia']) ?></td>
-                                <td><?= e($t['codigo_postal']) ?></td>
+                                <td><?= e($t['estado']) ?></td>
+                                <td><?= e($t['pais']) ?></td>
+                                <td><?= e($t['cod_postal']) ?></td>
+                                <td><?= e($t['terminos']) ?></td>
                                 <td class="text-center">
                                     <a href="editar.php?id=<?= urlencode($t['id_tienda']) ?>" class="btn btn-warning btn-sm" title="Editar">
                                         <i class="fas fa-edit"></i>

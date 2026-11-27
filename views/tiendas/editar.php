@@ -66,25 +66,40 @@ require __DIR__ . '/../../includes/header.php';
                 </div>
             </div>
             <div class="form-group">
-                <label for="direccion">Direccion</label>
-                <input type="text" class="form-control" id="direccion" name="direccion"
-                       maxlength="60" value="<?= e($tienda['direccion']) ?>">
+                <label for="direcc_tienda">Direccion</label>
+                <input type="text" class="form-control" id="direcc_tienda" name="direcc_tienda"
+                       maxlength="40" value="<?= e($tienda['direcc_tienda']) ?>">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="ciudad">Ciudad</label>
                     <input type="text" class="form-control" id="ciudad" name="ciudad"
-                           maxlength="30" value="<?= e($tienda['ciudad']) ?>">
+                           maxlength="15" value="<?= e($tienda['ciudad']) ?>">
                 </div>
-                <div class="form-group col-md-5">
-                    <label for="provincia">Provincia</label>
-                    <input type="text" class="form-control" id="provincia" name="provincia"
-                           maxlength="30" value="<?= e($tienda['provincia']) ?>">
+                <div class="form-group col-md-2">
+                    <label for="estado">Estado (2 letras)</label>
+                    <input type="text" class="form-control" id="estado" name="estado"
+                           maxlength="2" value="<?= e($tienda['estado']) ?>">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="codigo_postal">Codigo postal</label>
-                    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal"
-                           maxlength="5" value="<?= e($tienda['codigo_postal']) ?>">
+                <div class="form-group col-md-2">
+                    <label for="pais">Pais (3 letras)</label>
+                    <input type="text" class="form-control" id="pais" name="pais"
+                           maxlength="3" value="<?= e($tienda['pais']) ?>">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="cod_postal">Cod. postal</label>
+                    <input type="text" class="form-control" id="cod_postal" name="cod_postal"
+                           maxlength="5" value="<?= e($tienda['cod_postal']) ?>">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="terminos">Terminos</label>
+                    <select class="form-control" id="terminos" name="terminos" required>
+                        <?php foreach (Tienda::getTerminos() as $op): ?>
+                            <option value="<?= e($op) ?>" <?= $tienda['terminos'] === $op ? 'selected' : '' ?>>
+                                <?= e($op) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Actualizar</button>
